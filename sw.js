@@ -1,5 +1,5 @@
 /* Service worker — Centro de Operaciones. Cache-first. NO intercepta File System Access ni IndexedDB (no pasan por fetch). */
-const C = 'ops-v2';
+const C = 'ops-v3';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './favicon.svg'];
 
 self.addEventListener('install', e => {
