@@ -4,272 +4,440 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Parte del Cadete — Jorge Chipana — Campaña Finales 2026-I</title>
+<title>Centro de Operaciones — Jorge Chipana — Finales 2026-I</title>
 <style>
   :root{
-    --olive:#3f4a1f; --olive2:#586627; --gold:#c9a227; --gold2:#e6cd7e;
-    --graphite:#20211c; --parch:#f7f3e7; --card:#fffdf6; --line:#d8c99a;
-    --muted:#7c745c; --ok:#4a7a23; --okbg:#e9f1da; --no:#9a2a2a; --nobg:#f6e5e3; --pend:#ece7d6;
+    --olive:#3f4a1f; --olive2:#586627; --gold:#9a7b1a; --gold2:#c9a227;
+    --ink:#1c1e18; --paper:#fbfaf5; --card:#ffffff; --line:#e2dcc7; --line2:#efeadb;
+    --muted:#7c745c; --ok:#3f7a1f; --okbg:#eaf3dd; --no:#9a2a2a; --nobg:#f7e7e5; --pend:#efeadb;
+    --serif:Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,Menlo,Consolas,monospace;
   }
   *{box-sizing:border-box}
   html,body{margin:0}
-  body{background:#1c1f17;color:var(--graphite);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    -webkit-font-smoothing:antialiased;padding:14px;}
-  .wrap{max-width:780px;margin:0 auto;}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;
-    box-shadow:0 1px 0 rgba(0,0,0,.04);margin-bottom:14px;overflow:hidden;
-    opacity:0;transform:translateY(10px);animation:rise .6s ease forwards;}
-  .card:nth-child(2){animation-delay:.05s}.card:nth-child(3){animation-delay:.1s}
-  .card:nth-child(4){animation-delay:.15s}.card:nth-child(5){animation-delay:.2s}
-  .card:nth-child(6){animation-delay:.25s}
-  @keyframes rise{to{opacity:1;transform:none}}
-  .pad{padding:16px 18px}
-  h2{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--olive2);margin:0 0 12px;
-    display:flex;align-items:center;gap:8px}
-  h2::before{content:"";width:16px;height:2px;background:var(--gold);display:inline-block}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;font-size:15px;line-height:1.5}
+  .wrap{max-width:860px;margin:0 auto;padding:0 16px 40px}
+  a{color:var(--olive2)}
 
-  /* DOSSIER */
-  .dossier{display:flex;gap:16px;align-items:center;padding:18px;
-    background:linear-gradient(135deg,#3f4a1f,#2c3417);color:#f3edd6;position:relative}
-  .dossier::after{content:"2026-I";position:absolute;top:10px;right:14px;font-family:ui-monospace,Menlo,monospace;
-    font-size:11px;letter-spacing:2px;color:var(--gold2);opacity:.8}
-  .crest{flex:0 0 76px}
-  .who .role{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:3px;color:var(--gold2)}
-  .who h1{margin:3px 0 4px;font-size:23px;letter-spacing:.5px;line-height:1.1;color:#fff;font-weight:700}
-  .who .meta{font-size:12.5px;color:#d9d2b4}
-  .who .lema{margin-top:7px;font-style:italic;font-size:12px;color:var(--gold2);
-    border-left:2px solid var(--gold);padding-left:8px}
+  /* TOPBAR */
+  .topbar{background:var(--olive);color:#f3efdf;border-bottom:3px solid var(--gold2)}
+  .topbar .in{max-width:860px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:14px}
+  .crest{flex:0 0 42px}
+  .brand .k{font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--gold2)}
+  .brand h1{font-family:var(--serif);font-weight:700;font-size:20px;margin:2px 0 1px;color:#fff;letter-spacing:.3px}
+  .brand .s{font-size:12px;color:#d7d1b6}
+  .topbar .badge{margin-left:auto;text-align:right;font-family:var(--mono);font-size:11px;color:var(--gold2);line-height:1.5}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:20;background:rgba(251,250,245,.95);backdrop-filter:saturate(1.2) blur(6px);
+    border-bottom:1px solid var(--line)}
+  nav .in{max-width:860px;margin:0 auto;display:flex;gap:2px;padding:0 10px;overflow-x:auto}
+  .tab-btn{appearance:none;background:none;border:none;font-family:var(--sans);font-size:13.5px;color:var(--muted);
+    padding:13px 14px;cursor:pointer;border-bottom:2.5px solid transparent;white-space:nowrap;letter-spacing:.2px}
+  .tab-btn:hover{color:var(--ink)}
+  .tab-btn.active{color:var(--olive);font-weight:600;border-color:var(--gold2)}
+
+  .view{display:none;animation:fade .35s ease}
+  .view.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  h2{font-family:var(--serif);font-size:18px;color:var(--olive);margin:26px 0 12px;font-weight:700;
+    padding-bottom:7px;border-bottom:1px solid var(--line)}
+  h2:first-child{margin-top:22px}
+  .sub{color:var(--muted);font-size:13px;margin:-6px 0 14px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:14px}
 
   /* COUNTDOWN */
-  .clock{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center}
-  .clock .u{background:var(--graphite);color:var(--gold2);border-radius:8px;padding:12px 4px}
-  .clock .u .v{font-family:ui-monospace,Menlo,monospace;font-size:26px;font-weight:700;color:#fff;line-height:1}
-  .clock .u .k{font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;margin-top:5px;color:var(--gold2)}
-  .opline{text-align:center;font-size:12.5px;color:var(--muted);margin-bottom:12px}
-  .opline b{color:var(--no)}
+  .nextlbl .k{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+  .nextlbl .v{font-size:17px;font-weight:700;margin-top:3px;line-height:1.3}
+  .nextlbl .v .cc{font-family:var(--mono);font-size:11px;color:var(--olive2)}
+  .clock{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center;margin-top:12px}
+  .clock .u{background:var(--ink);border-radius:8px;padding:13px 4px}
+  .clock .u .v{font-family:var(--mono);font-size:25px;font-weight:700;color:#fff;line-height:1}
+  .clock .u .k{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;margin-top:5px;color:var(--gold2)}
+  .mile{font-size:12.5px;color:var(--muted);margin-top:12px;line-height:1.8}
+  .mile b{color:var(--no)} .mile .tri{color:var(--gold);font-weight:700}
 
-  /* RINGS */
-  .rings{display:flex;justify-content:space-around;flex-wrap:wrap;gap:10px}
-  .ring{text-align:center;flex:1;min-width:120px}
-  .ring svg{display:block;margin:0 auto}
-  .ring .big{font-family:ui-monospace,Menlo,monospace;font-weight:700;font-size:22px;fill:var(--olive)}
-  .ring .cap{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:4px}
+  /* ORDERS / list */
+  .ord{list-style:none;margin:0;padding:0}
+  .ord li{display:flex;gap:10px;align-items:baseline;padding:8px 0;border-top:1px dashed var(--line2)}
+  .ord li:first-child{border-top:none}
+  .ord .cc{font-family:var(--mono);font-size:10px;color:var(--olive2);font-weight:600;flex:0 0 50px}
+  .ord .tt{flex:1}
+  .ord .dd{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
+  .ord .dd.soon{color:var(--no);font-weight:700}
 
-  /* MISSION CARDS */
-  .missions{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
-  .m{border:1px solid var(--line);border-radius:8px;padding:11px 12px;background:var(--parch)}
+  /* TASKS */
+  .pbar{height:10px;background:var(--line2);border-radius:6px;overflow:hidden;margin:4px 0 4px}
+  .pbar > i{display:block;height:100%;background:linear-gradient(90deg,var(--olive2),var(--ok));width:0;transition:width .8s ease}
+  .pstat{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:14px}
+  .tk{display:grid;grid-template-columns:24px 1fr auto;gap:11px;align-items:start;padding:10px 0;border-top:1px solid var(--line2)}
+  .tk:first-child{border-top:none}
+  .tk input[type=checkbox]{width:18px;height:18px;margin-top:1px;accent-color:var(--ok);cursor:pointer}
+  .tk .body .t{font-size:14px;line-height:1.35}
+  .tk.done .body .t{text-decoration:line-through;color:#b3ac96}
+  .tk .meta{margin-top:3px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .pill{font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:20px;border:1px solid;font-weight:600}
+  .p-atk{color:#7a1f1f;border-color:#caa;background:#f7e7e5}
+  .p-man{color:#6b5b00;border-color:#d8c98a;background:#f6efd6}
+  .p-seg{color:#3b5a2a;border-color:#bcd0a6;background:#eaf3dd}
+  .p-fin{color:#fff;border-color:var(--gold);background:var(--gold)}
+  .tk .dd{font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .tk .dd.soon{color:var(--no);font-weight:700}
+  .tk .dd.today{color:#fff;background:var(--no);padding:1px 7px;border-radius:10px}
+  .tk .x{background:none;border:none;color:#c4bda6;cursor:pointer;font-size:17px;line-height:1;padding:0 2px}
+  .tk .x:hover{color:var(--no)}
+  .phsep{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);
+    margin:16px 0 2px;padding-top:10px;border-top:2px solid var(--line)}
+
+  .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  input,select,button,textarea{font-family:inherit;font-size:13.5px;padding:8px 10px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink)}
+  button{background:var(--olive);color:#fff;border-color:var(--olive);cursor:pointer;font-weight:600;letter-spacing:.2px}
+  button.alt{background:#fff;color:var(--olive)}
+  button.ghost{background:none;border-color:var(--line);color:var(--muted)}
+  textarea{width:100%;min-height:90px;font-family:var(--mono);font-size:12px}
+  .hint{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.6}
+
+  /* COURSES */
+  .missions{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+  .m{border:1px solid var(--line);border-radius:9px;padding:12px 13px;background:#fff}
+  .m.tri{background:#fbf3d6;border-color:var(--gold2)}
   .m .top{display:flex;justify-content:space-between;align-items:baseline}
-  .m .nm{font-weight:600;font-size:14px}
-  .m .code{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--muted)}
-  .m .row{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:6px}
-  .pill{font-family:ui-monospace,Menlo,monospace;font-size:10px;padding:2px 7px;border-radius:20px;border:1px solid;font-weight:600}
-  .p-atk{color:#7a1f1f;border-color:#7a1f1f;background:#f6e5e3}
-  .p-man{color:#6b5b00;border-color:#6b5b00;background:#f6efd6}
-  .p-seg{color:#3b5a2a;border-color:#3b5a2a;background:#e9f1da}
+  .m .nm{font-weight:700;font-size:14px}
+  .m .code{font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .m .r{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:7px}
 
   /* GRID */
-  .phase{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin:2px 0 6px}
   .grid{display:grid;grid-template-columns:repeat(11,1fr);gap:5px}
-  .cell{border:1px solid var(--line);border-radius:5px;min-height:46px;padding:4px 2px;text-align:center;
-    font-family:ui-monospace,Menlo,monospace;transition:transform .1s}
-  .cell:hover{transform:translateY(-2px)}
-  .cell .d{font-size:9.5px;color:var(--muted)}
-  .cell .m2{font-size:16px;font-weight:700;margin-top:1px}
+  .cell{border:1px solid var(--line);border-radius:5px;min-height:44px;padding:4px 2px;text-align:center;font-family:var(--mono)}
+  .cell .d{font-size:9px;color:var(--muted)}
+  .cell .m2{font-size:15px;font-weight:700;margin-top:1px}
   .cell.c{background:var(--okbg);border-color:var(--ok)} .cell.c .m2{color:var(--ok)}
   .cell.n{background:var(--nobg);border-color:var(--no)} .cell.n .m2{color:var(--no)}
-  .cell.pend .m2{color:#c4bda6}
-  .cell.exam{outline:2px solid var(--gold);outline-offset:-2px}
-  .cell .x{font-size:8px;color:#9a7b1a;letter-spacing:.5px;font-weight:700}
-  .legend{font-size:11px;color:var(--muted);margin-top:10px;display:flex;gap:14px;flex-wrap:wrap}
+  .cell.pend .m2{color:#cdc7b0}
+  .cell.exam{outline:2px solid var(--gold2);outline-offset:-2px}
+  .cell .x2{font-size:7.5px;color:var(--gold);letter-spacing:.5px;font-weight:700}
+  .legend{font-size:11.5px;color:var(--muted);margin-top:10px;display:flex;gap:14px;flex-wrap:wrap}
   .sw{display:inline-block;width:11px;height:11px;border-radius:3px;vertical-align:-1px;margin-right:4px}
 
-  /* FAMILY */
-  .family{background:linear-gradient(135deg,#fffdf6,#f3eeddff)}
-  .family p{font-size:13.5px;line-height:1.6;margin:0 0 8px}
-  .family .sign{text-align:right;font-style:italic;color:var(--olive2);font-size:13px}
+  /* RINGS / FAMILY */
+  .rings{display:flex;justify-content:space-around;flex-wrap:wrap;gap:10px}
+  .ring{text-align:center;flex:1;min-width:120px}
+  .ring .big{font-family:var(--mono);font-weight:700;font-size:21px;fill:var(--olive)}
+  .ring .cap{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:4px}
+  .famcard{background:linear-gradient(135deg,#fff,#f5f0e0)}
+  .famcard p{font-size:14px;line-height:1.65;margin:0 0 9px}
+  .famcard .sign{text-align:right;font-style:italic;color:var(--olive2)}
 
-  /* PANEL */
-  .panel .ctrls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
-  input,select,button{font-family:inherit;font-size:13px;padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:#fff}
-  button{background:var(--olive);color:#fff;border-color:var(--olive);cursor:pointer;letter-spacing:.3px}
-  button.alt{background:#fff;color:var(--olive)}
-  textarea{width:100%;min-height:84px;font-family:ui-monospace,Menlo,monospace;font-size:12px;border:1px solid var(--line);border-radius:6px;padding:8px}
-  .hint{font-size:11px;color:var(--muted);margin-top:6px}
-  .toggle{position:fixed;top:10px;right:10px;z-index:9;background:var(--gold);color:var(--graphite);
-    border:none;border-radius:20px;padding:7px 13px;font-size:12px;font-weight:600;cursor:pointer;letter-spacing:.5px}
-  .hideFam{display:none}
-  footer{color:#9b937a;text-align:center;font-size:11px;padding:6px 0 2px}
+  /* FILES */
+  .step{display:flex;gap:12px;padding:11px 0;border-top:1px solid var(--line2)}
+  .step:first-child{border-top:none}
+  .step .n{flex:0 0 26px;height:26px;border-radius:50%;background:var(--olive);color:#fff;font-weight:700;
+    display:flex;align-items:center;justify-content:center;font-size:13px}
+  .note{background:#fbf3d6;border:1px solid var(--gold2);border-radius:8px;padding:11px 13px;font-size:13px;line-height:1.6;margin:12px 0}
+  code{font-family:var(--mono);font-size:12px;background:#f0ecdd;padding:1px 5px;border-radius:4px}
+  ul.folders{margin:8px 0 0;padding-left:18px;font-size:13px;line-height:1.8}
 
-  @media (max-width:560px){
-    .who h1{font-size:19px}.crest{flex-basis:60px}
-    .clock .u .v{font-size:21px}.grid{grid-template-columns:repeat(6,1fr)}
-  }
-  @media print{
-    body{background:#fff;padding:0}.toggle,.panel{display:none !important}
-    .card{box-shadow:none;break-inside:avoid}
-    .dossier,.clock .u,.cell.c,.cell.n,.pill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  }
+  footer{color:#a9a288;text-align:center;font-size:11px;padding:18px 0 2px}
+  @media(max-width:560px){.grid{grid-template-columns:repeat(6,1fr)}.brand h1{font-size:17px}.topbar .badge{display:none}}
+  @media print{nav,.row,.panelctrls{display:none!important}.view{display:block!important}}
 </style>
 </head>
 <body>
-<button class="toggle" id="vtoggle" onclick="toggleView()">Panel de mando</button>
+
+<div class="topbar"><div class="in">
+  <div class="crest">
+    <svg viewBox="0 0 80 92" width="42" height="48" xmlns="http://www.w3.org/2000/svg" aria-label="Insignia">
+      <path d="M40 2 L76 12 V46 C76 70 58 84 40 90 C22 84 4 70 4 46 V12 Z" fill="#2c3417" stroke="#c9a227" stroke-width="3"/>
+      <polygon points="40,22 45,34 58,34 47,42 51,55 40,47 29,55 33,42 22,34 35,34" fill="#e6cd7e"/>
+      <text x="40" y="78" text-anchor="middle" font-family="monospace" font-size="11" fill="#c9a227" font-weight="700" letter-spacing="2">UNI</text>
+    </svg>
+  </div>
+  <div class="brand">
+    <div class="k">CENTRO DE OPERACIONES · CADETE-INGENIERO</div>
+    <h1>Jorge Luis Chipana Aymara</h1>
+    <div class="s">UNI-FIC · Ing. Civil 4.º · Campaña de Finales 2026-I</div>
+  </div>
+  <div class="badge">2026-I<br><span id="todaystr"></span></div>
+</div></div>
+
+<nav><div class="in" id="tabs">
+  <button class="tab-btn active" data-tab="hoy">Hoy</button>
+  <button class="tab-btn" data-tab="tareas">Tareas</button>
+  <button class="tab-btn" data-tab="cursos">Cursos &amp; Calendario</button>
+  <button class="tab-btn" data-tab="archivos">Archivos</button>
+  <button class="tab-btn" data-tab="familia">Familia</button>
+</div></nav>
+
 <div class="wrap">
 
-  <!-- DOSSIER -->
-  <div class="card">
-    <div class="dossier">
-      <div class="crest">
-        <svg viewBox="0 0 80 92" width="76" height="88" xmlns="http://www.w3.org/2000/svg" aria-label="Insignia">
-          <path d="M40 2 L76 12 V46 C76 70 58 84 40 90 C22 84 4 70 4 46 V12 Z" fill="#2c3417" stroke="#c9a227" stroke-width="2.5"/>
-          <path d="M40 9 L70 17 V46 C70 66 55 78 40 83 C25 78 10 66 10 46 V17 Z" fill="#3f4a1f"/>
-          <polygon points="40,20 44,30 55,30 46,37 49,48 40,41 31,48 34,37 25,30 36,30" fill="#e6cd7e"/>
-          <path d="M18 64 Q40 50 62 64" fill="none" stroke="#e6cd7e" stroke-width="2.4"/>
-          <line x1="24" y1="60.5" x2="24" y2="68" stroke="#e6cd7e" stroke-width="2"/>
-          <line x1="40" y1="56.5" x2="40" y2="68" stroke="#e6cd7e" stroke-width="2"/>
-          <line x1="56" y1="60.5" x2="56" y2="68" stroke="#e6cd7e" stroke-width="2"/>
-          <text x="40" y="76" text-anchor="middle" font-family="monospace" font-size="9" fill="#c9a227" font-weight="700" letter-spacing="2">UNI</text>
-        </svg>
+  <!-- ===== HOY ===== -->
+  <section class="view active" data-view="hoy">
+    <h2>Próximo objetivo</h2>
+    <div class="card">
+      <div class="nextlbl"><div class="k">Siguiente en la mira</div><div class="v" id="nextlabel">—</div></div>
+      <div class="clock">
+        <div class="u"><div class="v" id="cd">--</div><div class="k">días</div></div>
+        <div class="u"><div class="v" id="ch">--</div><div class="k">horas</div></div>
+        <div class="u"><div class="v" id="cm">--</div><div class="k">min</div></div>
+        <div class="u"><div class="v" id="cs">--</div><div class="k">seg</div></div>
       </div>
-      <div class="who">
-        <div class="role">CADETE-INGENIERO · CIVIL</div>
-        <h1>Jorge Luis Chipana Aymara</h1>
-        <div class="meta">UNI-FIC · 4.º semestre · Promoción 2026 · Campaña de Finales 2026-I</div>
-        <div class="lema">"La instrucción la cumplo yo; el sistema solo quita excusas."</div>
+      <div class="mile">
+        Primer final: <b>lun 6 jul · Geología</b> &nbsp;·&nbsp; <span class="tri">TRIPLE mié 8 jul:</span> Mate IV (2-4) · Tecnología (4-6) · Programación (6-8) &nbsp;·&nbsp; Cierre: <b>sáb 11 jul · Topografía</b>
       </div>
     </div>
-  </div>
 
-  <!-- COUNTDOWN -->
-  <div class="card"><div class="pad">
-    <h2>Cuenta regresiva a la operación</h2>
-    <div class="opline">Inicio de operaciones: <b>lun 6 jul</b> &nbsp;·&nbsp; Objetivo principal (doble final): <b>mié 8 jul</b></div>
-    <div class="clock">
-      <div class="u"><div class="v" id="cd">--</div><div class="k">días</div></div>
-      <div class="u"><div class="v" id="ch">--</div><div class="k">horas</div></div>
-      <div class="u"><div class="v" id="cm">--</div><div class="k">min</div></div>
-      <div class="u"><div class="v" id="cs">--</div><div class="k">seg</div></div>
+    <h2>Órdenes de hoy</h2>
+    <div class="sub">Tareas vencidas o de hoy que siguen abiertas, y lo que viene enseguida.</div>
+    <div class="card"><ul class="ord" id="orders"></ul></div>
+
+    <h2>Parte de la noche</h2>
+    <div class="sub">Una línea cada noche. Sin parte = N por protocolo. Fuente única: <code>RECORD.md</code>.</div>
+    <div class="card">
+      <div class="row">
+        <input type="date" id="f-date">
+        <select id="f-st"><option value="C">C — Cumplido</option><option value="N">N — No cumplido</option></select>
+        <input type="text" id="f-note" placeholder="qué resolviste sin ayuda" style="flex:1;min-width:170px">
+        <button onclick="addParte()">Añadir parte</button>
+      </div>
+      <div class="hint">Racha actual: <b id="streakline">—</b>. Tras añadir, ve a <b>Cursos &amp; Calendario</b> y copia la bitácora de vuelta a tu <code>RECORD.md</code>.</div>
     </div>
-  </div></div>
+  </section>
 
-  <!-- RINGS -->
-  <div class="card"><div class="pad">
+  <!-- ===== TAREAS ===== -->
+  <section class="view" data-view="tareas">
+    <h2>Tareas y avances</h2>
+    <div class="sub">Marca cada casilla al cumplir. Se guarda en tu navegador automáticamente. Exporta a <code>TAREAS.md</code> para que yo lo lea.</div>
+    <div class="card">
+      <div class="pbar"><i id="pfill"></i></div>
+      <div class="pstat" id="pstat">0 / 0 completadas</div>
+      <div id="tasklist"></div>
+    </div>
+
+    <h2>Añadir / gestionar</h2>
+    <div class="card">
+      <div class="row">
+        <input type="text" id="nt-text" placeholder="nueva tarea…" style="flex:1;min-width:180px">
+        <select id="nt-course">
+          <option value="GE001">GE001 Geología</option>
+          <option value="CB411">CB411 Mate IV</option>
+          <option value="CB415">CB415 Programación</option>
+          <option value="EC114">EC114 Dinámica</option>
+          <option value="CO421">CO421 Tecnología</option>
+          <option value="TV114">TV114 Topografía</option>
+          <option value="BEF01">BEF01 Ética</option>
+        </select>
+        <input type="date" id="nt-date">
+        <button onclick="addTask()">Añadir</button>
+      </div>
+      <div class="row panelctrls" style="margin-top:10px">
+        <button class="alt" onclick="exportTasks()">⬇ Exportar TAREAS.md</button>
+        <button class="ghost" onclick="resetTasks()">↺ Restaurar plan</button>
+      </div>
+      <div class="hint">Las casillas viven en este navegador (no se envían a ninguna nube). Para que yo vea tu avance, pulsa <b>Exportar</b> y guarda el archivo en la carpeta <code>CAMPAMENTO</code>; luego avísame.</div>
+    </div>
+  </section>
+
+  <!-- ===== CURSOS & CALENDARIO ===== -->
+  <section class="view" data-view="cursos">
+    <h2>Frente de batalla — 7 cursos</h2>
+    <div class="card"><div class="missions" id="missions"></div></div>
+
+    <h2>Diario de operaciones (19 jun – 11 jul)</h2>
+    <div class="card">
+      <div class="grid" id="grid"></div>
+      <div class="legend">
+        <span><span class="sw" style="background:#3f7a1f"></span>Cumplido</span>
+        <span><span class="sw" style="background:#9a2a2a"></span>No cumplido</span>
+        <span><span class="sw" style="background:#efeadb"></span>Sin parte</span>
+        <span><span class="sw" style="background:#c9a227"></span>Examen</span>
+      </div>
+    </div>
+
+    <h2>Bitácora (RECORD.md)</h2>
+    <div class="card">
+      <textarea id="bitacora" spellcheck="false"></textarea>
+      <div class="row panelctrls" style="margin-top:8px">
+        <button class="alt" onclick="render()">Actualizar</button>
+        <label class="alt" style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;border:1px solid var(--line);border-radius:7px;padding:8px 10px;background:#fff;color:var(--olive)">
+          Cargar RECORD.md <input type="file" accept=".md,.txt" style="display:none" onchange="loadFile(event)">
+        </label>
+        <button class="alt" onclick="copyBit()">Copiar bitácora</button>
+        <button class="ghost" onclick="window.print()">Imprimir</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ARCHIVOS ===== -->
+  <section class="view" data-view="archivos">
+    <h2>Cómo me pasas archivos</h2>
+    <div class="note"><b>Honestidad técnica:</b> esta página es estática (GitHub Pages, sin servidor). <b>No puede recibir archivos.</b> No hay botón de "subir" porque no funcionaría. El método real es por carpeta — y es más rápido.</div>
+    <div class="card">
+      <div class="step"><div class="n">1</div><div><b>Arrastra</b> el archivo (PDF, Excel, foto de tu hoja) a la carpeta <code>_BANDEJA (sube aqui)</code> de tu Escritorio, dentro de <code>SEMESTRE 4 - UNI 2026</code>.</div></div>
+      <div class="step"><div class="n">2</div><div><b>Avísame</b> en el chat: <i>"dejé en la bandeja el archivo X"</i>.</div></div>
+      <div class="step"><div class="n">3</div><div>Lo <b>leo directo de tu Mac</b> y trabajamos sobre él (compilo, resumo, corrijo).</div></div>
+    </div>
+    <h2>O directo a la carpeta del curso</h2>
+    <div class="card">
+      <ul class="folders">
+        <li>Paper cable colgante + PC6 → <code>CB411 · Matemática IV</code></li>
+        <li>Armadura (PDF + Excel) → <code>CB415 · Programación Digital</code></li>
+        <li>Gráficos Excel PC7/PC8 → <code>EC114 · Dinámica</code></li>
+        <li>Hojas / consignas de Geología → <code>GE001 · Geología General</code></li>
+        <li>Indicaciones de Topografía → <code>TV114 · Topografía II</code></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== FAMILIA ===== -->
+  <section class="view" data-view="familia">
     <h2>Estado de instrucción</h2>
-    <div class="rings">
-      <div class="ring">
-        <svg width="96" height="96" viewBox="0 0 96 96">
-          <circle cx="48" cy="48" r="40" fill="none" stroke="#ece7d6" stroke-width="9"/>
-          <circle id="r-cump" cx="48" cy="48" r="40" fill="none" stroke="#4a7a23" stroke-width="9"
-            stroke-linecap="round" stroke-dasharray="251.3" stroke-dashoffset="251.3" transform="rotate(-90 48 48)"/>
-          <text class="big" x="48" y="54" text-anchor="middle" id="r-cump-t">0%</text>
-        </svg>
-        <div class="cap">Cumplimiento</div>
-      </div>
-      <div class="ring">
-        <svg width="96" height="96" viewBox="0 0 96 96">
-          <circle cx="48" cy="48" r="40" fill="none" stroke="#ece7d6" stroke-width="9"/>
-          <circle id="r-rach" cx="48" cy="48" r="40" fill="none" stroke="#c9a227" stroke-width="9"
-            stroke-linecap="round" stroke-dasharray="251.3" stroke-dashoffset="251.3" transform="rotate(-90 48 48)"/>
-          <text class="big" x="48" y="54" text-anchor="middle" id="r-rach-t">0</text>
-        </svg>
-        <div class="cap">Racha (días)</div>
-      </div>
-      <div class="ring">
-        <svg width="96" height="96" viewBox="0 0 96 96">
-          <circle cx="48" cy="48" r="40" fill="none" stroke="#ece7d6" stroke-width="9"/>
-          <circle id="r-dias" cx="48" cy="48" r="40" fill="none" stroke="#586627" stroke-width="9"
-            stroke-linecap="round" stroke-dasharray="251.3" stroke-dashoffset="251.3" transform="rotate(-90 48 48)"/>
-          <text class="big" x="48" y="54" text-anchor="middle" id="r-dias-t">0</text>
-        </svg>
-        <div class="cap">Partes registrados</div>
-      </div>
-    </div>
-  </div></div>
+    <div class="card"><div class="rings">
+      <div class="ring"><svg width="92" height="92" viewBox="0 0 96 96">
+        <circle cx="48" cy="48" r="40" fill="none" stroke="#efeadb" stroke-width="9"/>
+        <circle id="r-cump" cx="48" cy="48" r="40" fill="none" stroke="#3f7a1f" stroke-width="9" stroke-linecap="round" stroke-dasharray="251.3" stroke-dashoffset="251.3" transform="rotate(-90 48 48)"/>
+        <text class="big" x="48" y="54" text-anchor="middle" id="r-cump-t">0%</text></svg><div class="cap">Cumplimiento</div></div>
+      <div class="ring"><svg width="92" height="92" viewBox="0 0 96 96">
+        <circle cx="48" cy="48" r="40" fill="none" stroke="#efeadb" stroke-width="9"/>
+        <circle id="r-rach" cx="48" cy="48" r="40" fill="none" stroke="#c9a227" stroke-width="9" stroke-linecap="round" stroke-dasharray="251.3" stroke-dashoffset="251.3" transform="rotate(-90 48 48)"/>
+        <text class="big" x="48" y="54" text-anchor="middle" id="r-rach-t">0</text></svg><div class="cap">Racha (días)</div></div>
+      <div class="ring"><svg width="92" height="92" viewBox="0 0 96 96">
+        <circle cx="48" cy="48" r="40" fill="none" stroke="#efeadb" stroke-width="9"/>
+        <circle id="r-dias" cx="48" cy="48" r="40" fill="none" stroke="#586627" stroke-width="9" stroke-linecap="round" stroke-dasharray="251.3" stroke-dashoffset="251.3" transform="rotate(-90 48 48)"/>
+        <text class="big" x="48" y="54" text-anchor="middle" id="r-dias-t">0</text></svg><div class="cap">Partes registrados</div></div>
+    </div></div>
 
-  <!-- MISSIONS -->
-  <div class="card"><div class="pad">
-    <h2>Frente de batalla — 7 finales</h2>
-    <div class="missions" id="missions"></div>
-  </div></div>
-
-  <!-- GRID -->
-  <div class="card"><div class="pad">
-    <h2>Diario de operaciones (19 jun – 10 jul)</h2>
-    <div class="phase" id="phaselabel">Fase 1: Construcción (hasta 1 jul) &nbsp;→&nbsp; Fase 2: Consolidación + exámenes (2–10 jul)</div>
-    <div class="grid" id="grid"></div>
-    <div class="legend">
-      <span><span class="sw" style="background:#4a7a23"></span>Cumplido (C)</span>
-      <span><span class="sw" style="background:#9a2a2a"></span>No cumplido (N)</span>
-      <span><span class="sw" style="background:#ece7d6"></span>Sin parte</span>
-      <span><span class="sw" style="background:#c9a227"></span>Examen</span>
-    </div>
-  </div></div>
-
-  <!-- FAMILY -->
-  <div class="card family"><div class="pad">
     <h2>Para mi familia</h2>
-    <p>Soy Jorge, cadete-ingeniero de Civil en la UNI. Esto es mi campaña de finales 2026-I: siete cursos, tres semanas, una sola regla — cumplir el objetivo de cada día.</p>
-    <p>Cada casilla <b style="color:var(--ok)">verde</b> de arriba es un día en que cumplí. Pueden seguir mi disciplina aquí, día a día. Que lo vean me obliga a estar a la altura. Gracias por acompañarme.</p>
-    <div class="sign">— Jorge Luis Chipana Aymara</div>
-  </div></div>
-
-  <!-- PANEL (oculto en vista familia) -->
-  <div class="card panel" id="panel"><div class="pad">
-    <h2>Panel de mando (solo el cadete)</h2>
-    <div class="ctrls">
-      <input type="date" id="f-date">
-      <select id="f-st"><option value="C">C — Cumplido</option><option value="N">N — No cumplido</option></select>
-      <input type="text" id="f-note" placeholder="qué resolviste sin ayuda" style="flex:1;min-width:180px">
-      <button onclick="addParte()">Añadir parte</button>
+    <div class="card famcard">
+      <p>Soy Jorge, cadete-ingeniero de Civil en la UNI. Esta es mi campaña de finales 2026-I: siete cursos, tres semanas, una sola regla — cumplir el objetivo de cada día.</p>
+      <p>Cada anillo de arriba mide mi disciplina, y cada día verde es un día en que cumplí. Que lo vean me obliga a estar a la altura. Gracias por acompañarme.</p>
+      <div class="sign">— Jorge Luis Chipana Aymara</div>
     </div>
-    <textarea id="bitacora" spellcheck="false"></textarea>
-    <div class="ctrls" style="margin-top:8px">
-      <button class="alt" onclick="render()">Actualizar</button>
-      <label class="alt" style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;border:1px solid var(--line);border-radius:6px;padding:7px 9px;background:#fff;color:var(--olive)">
-        Cargar RECORD.md <input type="file" accept=".md,.txt" style="display:none" onchange="loadFile(event)">
-      </label>
-      <button class="alt" onclick="copyBit()">Copiar bitácora</button>
-      <button onclick="window.print()">Imprimir</button>
-    </div>
-    <div class="hint">Fuente única: tu <b>RECORD.md</b>. Pega o carga sus líneas; al añadir un parte, copia la bitácora de vuelta a RECORD.md (lo leen los oficiales automáticos).</div>
-  </div></div>
+  </section>
 
-  <footer>Parte del cadete · generado 19 jun 2026 · objetivo mínimo diario + descanso 7-8h</footer>
+  <footer>Centro de Operaciones · actualizado 20 jun 2026 · piso diario + descanso 7-8h</footer>
 </div>
 
 <script>
-  var EXAMS={"2026-07-06":"CB415/Din/Geo/Topo","2026-07-08":"Mate IV+Tec"};
-  var DEFAULT_BIT="2026-06-19 | _ | primer dia de operaciones";
-  var MISSIONS=[
-    {n:"Matemática IV",c:"CB411",f:"8 jul (firme)",p:"33%",cl:"p-atk",k:"ATAQUE"},
-    {n:"Dinámica",c:"EC114",f:"6 jul? (confirmar)",p:"50%",cl:"p-atk",k:"ATAQUE"},
-    {n:"Programación",c:"CB415",f:"6-10 jul",p:"50%",cl:"p-atk",k:"ATAQUE"},
-    {n:"Tecnología",c:"CO421",f:"8 jul (firme)",p:"50%",cl:"p-man",k:"MANTENER"},
-    {n:"Topografía II",c:"TV114",f:"6 jul? (confirmar)",p:"25%",cl:"p-man",k:"MANTENER"},
-    {n:"Geología",c:"GE001",f:"6 jul? (confirmar)",p:"50%",cl:"p-man",k:"MANTENER"},
-    {n:"Ética",c:"BEF01",f:"sin examen",p:"0%",cl:"p-seg",k:"ASEGURAR"}
+  var MESES=["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+  var CINFO={GE001:{n:"Geología",cl:"p-man"},CB411:{n:"Mate IV",cl:"p-atk"},CB415:{n:"Programación",cl:"p-atk"},
+    EC114:{n:"Dinámica",cl:"p-atk"},CO421:{n:"Tecnología",cl:"p-man"},TV114:{n:"Topografía",cl:"p-man"},BEF01:{n:"Ética",cl:"p-seg"}};
+  var EXAMS={"2026-07-06":"Geología","2026-07-08":"Mate IV · Tecno · Prog","2026-07-09":"Dinámica","2026-07-11":"Topografía"};
+  var DEADLINES=[
+    {d:"2026-06-21T08:15",t:"Salida de campo · Morro Solar",c:"GE001"},
+    {d:"2026-06-22T10:00",t:"Exposición Orogenia + informe de campo",c:"GE001"},
+    {d:"2026-06-24T23:59",t:"PC5 control de lectura (cable colgante)",c:"CB411"},
+    {d:"2026-06-24T23:59",t:"PC4 (1 pregunta, 10 pts)",c:"CB415"},
+    {d:"2026-06-25T23:59",t:"PC7 escrito + gráficos Excel",c:"EC114"},
+    {d:"2026-06-26T23:59",t:"Armadura (análisis matricial, 5 pts)",c:"CB415"},
+    {d:"2026-06-26T23:59",t:"Ética: informe + diapositiva + foro",c:"BEF01"},
+    {d:"2026-06-26T23:59",t:"Diagramas fallas/pliegues + papa + libro",c:"GE001"},
+    {d:"2026-07-01T23:59",t:"PC6 (≈10 ejercicios a mano)",c:"CB411"},
+    {d:"2026-07-02T23:59",t:"PC8 escrito + gráficos Excel",c:"EC114"},
+    {d:"2026-07-03T23:59",t:"Ética: exposición final (formal)",c:"BEF01"},
+    {d:"2026-07-04T12:00",t:"Proyecto secciones transversales + sustentación",c:"TV114"},
+    {d:"2026-07-06T07:00",t:"FINAL Geología",c:"GE001",fin:1},
+    {d:"2026-07-08T14:00",t:"FINAL Matemática IV (2-4 pm)",c:"CB411",fin:1,tri:1},
+    {d:"2026-07-08T16:00",t:"FINAL Tecnología (4-6 pm)",c:"CO421",fin:1,tri:1},
+    {d:"2026-07-08T18:00",t:"FINAL Programación (6-8 pm)",c:"CB415",fin:1,tri:1},
+    {d:"2026-07-09T07:00",t:"FINAL Dinámica",c:"EC114",fin:1},
+    {d:"2026-07-11T07:00",t:"FINAL Topografía",c:"TV114",fin:1}
   ];
+  var MISSIONS=[
+    {c:"GE001",f:"lun 6 jul",p:"50%",k:"MANTENER"},
+    {c:"CB411",f:"mié 8 · 2pm",p:"33%",k:"ATAQUE",tri:1},
+    {c:"CO421",f:"mié 8 · 4pm",p:"50%",k:"MANTENER",tri:1},
+    {c:"CB415",f:"mié 8 · 6pm",p:"50%",k:"ATAQUE",tri:1},
+    {c:"EC114",f:"jue 9 jul",p:"50%",k:"ATAQUE"},
+    {c:"TV114",f:"sáb 11 jul",p:"25%",k:"MANTENER"},
+    {c:"BEF01",f:"sin examen",p:"—",k:"ASEGURAR"}
+  ];
+
   function pad(n){return n<10?"0"+n:""+n}
   function iso(dt){return dt.getFullYear()+"-"+pad(dt.getMonth()+1)+"-"+pad(dt.getDate())}
   function pISO(s){var p=s.split("-");return new Date(+p[0],+p[1]-1,+p[2])}
+  function pDT(s){var a=s.split("T"),d=a[0].split("-"),t=(a[1]||"00:00").split(":");return new Date(+d[0],+d[1]-1,+d[2],+t[0],+t[1],0)}
+  function dayStart(dt){return new Date(dt.getFullYear(),dt.getMonth(),dt.getDate())}
+  function esc(s){return (s+"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+  function diffDays(isoStr){return Math.round((dayStart(pISO(isoStr))-dayStart(new Date()))/86400000)}
+  function ddBadge(isoStr){var n=diffDays(isoStr);
+    if(n<0)return {s:"venció",cls:""};if(n===0)return {s:"HOY",cls:"today"};
+    if(n<=2)return {s:"faltan "+n+"d",cls:"soon"};return {s:"faltan "+n+"d",cls:""};}
 
-  // missions
-  (function(){var h="";for(var i=0;i<MISSIONS.length;i++){var m=MISSIONS[i];
-    h+='<div class="m"><div class="top"><span class="nm">'+m.n+'</span><span class="pill '+m.cl+'">'+m.k+'</span></div>'+
-       '<div class="row"><span class="code">'+m.c+'</span><span>Final: '+m.f+'</span></div>'+
-       '<div class="row"><span>Peso EF</span><b>'+m.p+'</b></div></div>';}
+  /* ---------- TABS ---------- */
+  document.getElementById("tabs").addEventListener("click",function(e){
+    var b=e.target.closest(".tab-btn");if(!b)return;var t=b.getAttribute("data-tab");
+    var btns=document.querySelectorAll(".tab-btn");for(var i=0;i<btns.length;i++)btns[i].classList.toggle("active",btns[i]===b);
+    var vs=document.querySelectorAll(".view");for(var j=0;j<vs.length;j++)vs[j].classList.toggle("active",vs[j].getAttribute("data-view")===t);
+    window.scrollTo(0,0);
+  });
+
+  /* ---------- TASKS (localStorage) ---------- */
+  var LSK="jorge_ops_v1";
+  function seedTasks(){var a=[];for(var i=0;i<DEADLINES.length;i++){var x=DEADLINES[i];
+    a.push({id:"s"+i,c:x.c,due:x.d.split("T")[0],t:x.t,fin:x.fin?1:0,done:false});}return a;}
+  function loadTasks(){try{var r=localStorage.getItem(LSK);if(r)return JSON.parse(r);}catch(e){}return seedTasks();}
+  function saveTasks(){try{localStorage.setItem(LSK,JSON.stringify(TASKS));}catch(e){}}
+  var TASKS=loadTasks();
+
+  function renderTasks(){
+    TASKS.sort(function(a,b){return a.due<b.due?-1:a.due>b.due?1:0});
+    var done=0,box=document.getElementById("tasklist"),h="",lastPhase="";
+    for(var i=0;i<TASKS.length;i++){var k=TASKS[i];if(k.done)done++;
+      var ph=k.fin?"FINALES":"ENTREGABLES";
+      if(ph!==lastPhase){h+='<div class="phsep">'+ph+'</div>';lastPhase=ph;}
+      var ci=CINFO[k.c]||{n:k.c,cl:"p-seg"},dt=pISO(k.due),bd=ddBadge(k.due);
+      h+='<div class="tk'+(k.done?" done":"")+'">'+
+        '<input type="checkbox" '+(k.done?"checked":"")+' onclick="toggleTask(\''+k.id+'\')">'+
+        '<div class="body"><div class="t">'+esc(k.t)+'</div><div class="meta">'+
+          '<span class="pill '+(k.fin?"p-fin":ci.cl)+'">'+ci.n+'</span>'+
+          '<span class="dd '+bd.cls+'">'+dt.getDate()+" "+MESES[dt.getMonth()]+' · '+bd.s+'</span>'+
+        '</div></div>'+
+        '<button class="x" title="eliminar" onclick="delTask(\''+k.id+'\')">✕</button></div>';
+    }
+    box.innerHTML=h;
+    var tot=TASKS.length,pct=tot?Math.round(done/tot*100):0;
+    document.getElementById("pfill").style.width=pct+"%";
+    document.getElementById("pstat").textContent=done+" / "+tot+" completadas  ·  "+pct+"%";
+    renderOrders();
+  }
+  function toggleTask(id){for(var i=0;i<TASKS.length;i++)if(TASKS[i].id===id)TASKS[i].done=!TASKS[i].done;saveTasks();renderTasks();}
+  function delTask(id){TASKS=TASKS.filter(function(k){return k.id!==id});saveTasks();renderTasks();}
+  function addTask(){var t=document.getElementById("nt-text").value.trim();if(!t)return;
+    var c=document.getElementById("nt-course").value,d=document.getElementById("nt-date").value||iso(new Date());
+    TASKS.push({id:"u"+Date.now(),c:c,due:d,t:t,fin:0,done:false});document.getElementById("nt-text").value="";saveTasks();renderTasks();}
+  function resetTasks(){if(confirm("¿Restaurar la lista al plan original? Perderás tus cambios y marcas.")){TASKS=seedTasks();saveTasks();renderTasks();}}
+  function exportTasks(){var lines=["# TAREAS — Campaña Finales 2026-I","","_Exportado desde el Centro de Operaciones._",""];
+    var lp="";for(var i=0;i<TASKS.length;i++){var k=TASKS[i],ph=k.fin?"FINALES":"ENTREGABLES";
+      if(ph!==lp){lines.push("","## "+ph,"");lp=ph;}
+      lines.push("- ["+(k.done?"x":" ")+"] "+k.due+" · "+k.c+" · "+k.t);}
+    var blob=new Blob([lines.join("\n")],{type:"text/markdown"});var u=URL.createObjectURL(blob);
+    var a=document.createElement("a");a.href=u;a.download="TAREAS.md";a.click();URL.revokeObjectURL(u);}
+
+  function renderOrders(){var now=new Date(),ul=document.getElementById("orders"),h="";
+    var open=TASKS.filter(function(k){return !k.done&&diffDays(k.due)<=0;});
+    open.sort(function(a,b){return a.due<b.due?-1:1});
+    var up=TASKS.filter(function(k){return !k.done&&diffDays(k.due)>0;});
+    up.sort(function(a,b){return a.due<b.due?-1:1});up=up.slice(0,3);
+    var list=open.concat(up);
+    if(!list.length){h='<li><span class="tt">Sin tareas abiertas. Disciplina al día.</span></li>';}
+    for(var i=0;i<list.length;i++){var k=list[i],ci=CINFO[k.c]||{n:k.c},bd=ddBadge(k.due);
+      h+='<li><span class="cc">'+k.c+'</span><span class="tt">'+esc(k.t)+'</span><span class="dd '+bd.cls+'">'+bd.s+'</span></li>';}
+    ul.innerHTML=h;}
+
+  /* ---------- MISSIONS ---------- */
+  (function(){var h="";for(var i=0;i<MISSIONS.length;i++){var m=MISSIONS[i],ci=CINFO[m.c];
+    h+='<div class="m'+(m.tri?' tri':'')+'"><div class="top"><span class="nm">'+ci.n+'</span><span class="pill '+ci.cl+'">'+m.k+'</span></div>'+
+       '<div class="r"><span class="code">'+m.c+'</span><span>Final: '+m.f+'</span></div>'+
+       '<div class="r"><span>Peso EF</span><b>'+m.p+'</b></div></div>';}
     document.getElementById("missions").innerHTML=h;})();
 
-  function ring(id,tid,frac,label){
-    var C=251.3; frac=Math.max(0,Math.min(1,frac));
-    var el=document.getElementById(id);
-    setTimeout(function(){el.style.transition="stroke-dashoffset 1.1s ease";el.style.strokeDashoffset=C*(1-frac);},80);
-    var t=document.getElementById(tid),target=label,cur=0;
-    if(/^\d+%$/.test(label)){var v=parseInt(label);var s=setInterval(function(){cur+=Math.ceil(v/24)||1;if(cur>=v){cur=v;clearInterval(s)}t.textContent=cur+"%"},35);}
-    else if(/^\d+$/.test(label)){var v2=parseInt(label);var s2=setInterval(function(){cur++;if(cur>=v2){cur=v2;clearInterval(s2)}t.textContent=cur},45);if(v2===0)t.textContent="0";}
-    else t.textContent=label;
-  }
-
+  /* ---------- RINGS + GRID ---------- */
+  function ring(id,tid,frac,label){var C=251.3;frac=Math.max(0,Math.min(1,frac));
+    var el=document.getElementById(id);setTimeout(function(){el.style.transition="stroke-dashoffset 1.1s ease";el.style.strokeDashoffset=C*(1-frac);},80);
+    document.getElementById(tid).textContent=label;}
   function render(){
     var map={},lines=document.getElementById("bitacora").value.split("\n");
     for(var i=0;i<lines.length;i++){var ln=lines[i].trim();if(ln.indexOf("|")<0)continue;
@@ -277,35 +445,26 @@
       var st=(p[1]||"").trim().toUpperCase().charAt(0);if(st!=="C"&&st!=="N")st="_";
       map[d]={st:st,note:(p[2]||"").trim()};}
     var g=document.getElementById("grid");g.innerHTML="";
-    var meses=["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
-    var d=pISO("2026-06-19"),end=pISO("2026-07-10"),today=iso(new Date());
-    var cump=0,reg=0,run=0,lastRun=0,elapsed=0;
+    var d=pISO("2026-06-19"),end=pISO("2026-07-11"),today=iso(new Date());
+    var cump=0,reg=0,run=0,lastRun=0,elapsed=0,total=0,dd=pISO("2026-06-19");
+    while(dd<=end){total++;dd.setDate(dd.getDate()+1);}
     while(d<=end){var k=iso(d),r=map[k],cls="cell",mk="";
       if(r&&r.st==="C"){cls+=" c";mk="C";cump++;reg++;run++;lastRun=run}
       else if(r&&r.st==="N"){cls+=" n";mk="N";reg++;run=0}
       else if(k<today){cls+=" pend";mk="·";run=0}
       else{cls+=" pend";mk=""}
-      if(k<=today)elapsed++;
-      if(EXAMS[k])cls+=" exam";
+      if(k<=today)elapsed++;if(EXAMS[k])cls+=" exam";
       var c=document.createElement("div");c.className=cls;
-      c.innerHTML="<div class='d'>"+d.getDate()+" "+meses[d.getMonth()]+"</div><div class='m2'>"+mk+"</div>"+(EXAMS[k]?"<div class='x'>EX</div>":"");
-      c.title=EXAMS[k]?("Examen: "+EXAMS[k]):(r?r.note:"");
-      g.appendChild(c);d.setDate(d.getDate()+1);}
+      c.innerHTML="<div class='d'>"+d.getDate()+" "+MESES[d.getMonth()]+"</div><div class='m2'>"+mk+"</div>"+(EXAMS[k]?"<div class='x2'>EX</div>":"");
+      c.title=EXAMS[k]?("Examen: "+EXAMS[k]):(r?r.note:"");g.appendChild(c);d.setDate(d.getDate()+1);}
     var frac=elapsed>0?cump/elapsed:0;
     ring("r-cump","r-cump-t",frac,Math.round(frac*100)+"%");
     ring("r-rach","r-rach-t",Math.min(lastRun/7,1),""+lastRun);
-    ring("r-dias","r-dias-t",reg/22,""+reg);
+    ring("r-dias","r-dias-t",reg/total,""+reg);
+    document.getElementById("streakline").textContent=lastRun+" día(s) seguidos";
   }
 
-  function tick(){
-    var now=new Date(),tgt=new Date(2026,6,6,7,0,0);
-    var s=Math.floor((tgt-now)/1000);if(s<0)s=0;
-    document.getElementById("cd").textContent=Math.floor(s/86400);
-    document.getElementById("ch").textContent=pad(Math.floor(s%86400/3600));
-    document.getElementById("cm").textContent=pad(Math.floor(s%3600/60));
-    document.getElementById("cs").textContent=pad(s%60);
-  }
-
+  /* ---------- PARTE + bitácora ---------- */
   function addParte(){var dt=document.getElementById("f-date").value||iso(new Date());
     var st=document.getElementById("f-st").value;var nt=document.getElementById("f-note").value.trim()||"(sin detalle)";
     var ta=document.getElementById("bitacora");ta.value=(ta.value.trim()+"\n"+dt+" | "+st+" | "+nt).trim();
@@ -316,14 +475,23 @@
       document.getElementById("bitacora").value=keep.join("\n");render();};r.readAsText(f);}
   function copyBit(){var ta=document.getElementById("bitacora");ta.select();try{document.execCommand("copy")}catch(e){}window.getSelection().removeAllRanges();}
 
-  var famHidden=false;
-  function toggleView(){famHidden=!famHidden;
-    document.getElementById("panel").classList.toggle("hideFam",famHidden);
-    document.getElementById("vtoggle").textContent=famHidden?"Vista cadete":"Panel de mando";}
+  /* ---------- COUNTDOWN ---------- */
+  function nextDeadline(){var now=new Date();for(var i=0;i<DEADLINES.length;i++){var dt=pDT(DEADLINES[i].d);if(dt>now)return {dt:dt,x:DEADLINES[i]};}return null;}
+  function tick(){var nd=nextDeadline(),lbl=document.getElementById("nextlabel");
+    if(!nd){lbl.textContent="Campaña completada ✓";["cd","ch","cm","cs"].forEach(function(id){document.getElementById(id).textContent="0";});return;}
+    lbl.innerHTML=esc(nd.x.t)+' <span class="cc">'+nd.x.c+'</span>';
+    var s=Math.floor((nd.dt-new Date())/1000);if(s<0)s=0;
+    document.getElementById("cd").textContent=Math.floor(s/86400);
+    document.getElementById("ch").textContent=pad(Math.floor(s%86400/3600));
+    document.getElementById("cm").textContent=pad(Math.floor(s%3600/60));
+    document.getElementById("cs").textContent=pad(s%60);}
 
+  /* ---------- INIT ---------- */
+  document.getElementById("todaystr").textContent=iso(new Date());
   document.getElementById("f-date").value=iso(new Date());
-  document.getElementById("bitacora").value=DEFAULT_BIT;
-  render();tick();setInterval(tick,1000);
+  document.getElementById("nt-date").value=iso(new Date());
+  document.getElementById("bitacora").value="2026-06-19 | _ | primer dia de operaciones";
+  renderTasks();render();tick();setInterval(tick,1000);
 </script>
 </body>
 </html>
