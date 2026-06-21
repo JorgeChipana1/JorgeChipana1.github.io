@@ -26,7 +26,7 @@
     --serif:Georgia,"Times New Roman",serif;
     --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     --mono:ui-monospace,Menlo,Consolas,monospace;
-    --fs-xs:11px; --fs-sm:13px; --fs-base:15px; --fs-md:17px; --fs-lg:20px; --fs-xl:25px;
+    --fs-xs:11px; --fs-sm:13px; --fs-base:15px; --fs-md:17px; --fs-lg:20px; --fs-xl:25px; --fs-2xl:32px; --fs-3xl:44px;
     --lh-body:1.55; --lh-tight:1.25;
     --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px;
     --r-sm:7px; --r-md:10px; --r-lg:14px;
@@ -65,8 +65,8 @@
   .topbar .in{max-width:860px;margin:0 auto;display:flex;align-items:center;gap:14px;
     padding:calc(14px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right)) 14px calc(16px + env(safe-area-inset-left))}
   .crest{flex:0 0 42px}
-  .brand .k{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:3px;color:var(--gold2)}
-  .brand h1{font-family:var(--serif);font-weight:700;font-size:clamp(17px,4.5vw,22px);margin:2px 0 1px;color:#fff;letter-spacing:.3px;line-height:var(--lh-tight)}
+  .brand .k{font-family:var(--mono);font-size:10px;letter-spacing:4px;color:var(--gold2)}
+  .brand h1{font-family:var(--serif);font-weight:700;font-size:clamp(19px,5vw,25px);margin:3px 0 2px;color:#fff;letter-spacing:.2px;line-height:var(--lh-tight)}
   .brand .s{font-size:12px;color:#d7d1b6}
   .topbar .right{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
   .topbar .badge{text-align:right;font-family:var(--mono);font-size:var(--fs-xs);color:var(--gold2);line-height:1.5;font-variant-numeric:tabular-nums}
@@ -92,8 +92,8 @@
   @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
   .view:focus{outline:none}
 
-  h2{font-family:var(--serif);font-size:clamp(16px,3.6vw,19px);color:var(--olive);margin:var(--sp-5) 0 var(--sp-3);font-weight:700;
-    padding-bottom:var(--sp-1);border-bottom:1px solid var(--line);line-height:var(--lh-tight)}
+  h2{font-family:var(--serif);font-size:clamp(18px,4vw,23px);color:var(--olive);margin:var(--sp-6) 0 var(--sp-3);font-weight:700;
+    padding-bottom:var(--sp-2);border-bottom:1px solid var(--line);line-height:var(--lh-tight);letter-spacing:-.01em}
   @media (prefers-color-scheme:dark){h2{color:var(--olive2)}}
   h2:first-of-type{margin-top:var(--sp-5)}
   .sub{color:var(--muted);font-size:var(--fs-sm);margin:-6px 0 var(--sp-4)}
@@ -102,10 +102,10 @@
     padding:var(--sp-4) calc(var(--sp-4) + 2px);margin-bottom:var(--sp-3);box-shadow:var(--sh-1)}
 
   /* COUNTDOWN */
-  .card.hero{box-shadow:var(--sh-2);padding:var(--sp-5);
+  .card.hero{box-shadow:var(--sh-2);padding:var(--sp-6) var(--sp-5);border-radius:var(--r-lg);
     background:linear-gradient(160deg,var(--card),color-mix(in srgb,var(--olive) 5%,var(--card)))}
-  .nextlbl .k{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
-  .nextlbl .v{font-size:var(--fs-md);font-weight:700;margin-top:3px;line-height:var(--lh-tight)}
+  .nextlbl .k{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+  .nextlbl .v{font-family:var(--serif);font-size:clamp(24px,6vw,40px);font-weight:700;margin-top:8px;line-height:1.08;letter-spacing:-.01em}
   .nextlbl .v .cc{font-family:var(--mono);font-size:var(--fs-xs);color:var(--olive2)}
   .clock{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center;margin-top:var(--sp-3)}
   .clock .u{background:var(--ink);border-radius:var(--r-sm);padding:13px 4px}
