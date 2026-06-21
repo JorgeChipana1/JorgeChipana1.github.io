@@ -209,7 +209,13 @@
   <!-- ===== TAREAS ===== -->
   <section class="view" data-view="tareas">
     <h2>Tareas y avances</h2>
-    <div class="sub">Marca cada casilla al cumplir. Se guarda en tu navegador automáticamente. Exporta a <code>TAREAS.md</code> para que yo lo lea.</div>
+    <div class="sub">Marca cada casilla al cumplir. Se guarda en tu navegador automáticamente. Vincula tu carpeta para que Claude lo lea.</div>
+    <div class="card" style="background:linear-gradient(135deg,#fff,#f5f0e0)">
+      <div style="font-family:var(--serif);font-weight:700;color:var(--olive);margin-bottom:6px">🔗 Sincronizar con Claude</div>
+      <div class="hint" id="syncstat" style="margin-top:0">Comprobando…</div>
+      <div class="row" style="margin-top:10px"><button id="syncbtn" onclick="linkFolder()">🔗 Vincular con mi Mac</button></div>
+      <div class="hint">Al vincular tu carpeta <code>CAMPAMENTO</code>, cada casilla y cada parte se guardan en <code>ESTADO_TABLERO.json</code> dentro de ella. Claude lo lee cuando trabajan juntos, y tus oficiales automáticos (6:03 y 22:00) también. Es lo más cerca de "tiempo real" que existe sin servidor.</div>
+    </div>
     <div class="card">
       <div class="pbar"><i id="pfill"></i></div>
       <div class="pstat" id="pstat">0 / 0 completadas</div>
@@ -379,7 +385,8 @@
   function seedTasks(){var a=[];for(var i=0;i<DEADLINES.length;i++){var x=DEADLINES[i];
     a.push({id:"s"+i,c:x.c,due:x.d.split("T")[0],t:x.t,fin:x.fin?1:0,done:false});}return a;}
   function loadTasks(){try{var r=localStorage.getItem(LSK);if(r)return JSON.parse(r);}catch(e){}return seedTasks();}
-  function saveTasks(){try{localStorage.setItem(LSK,JSON.stringify(TASKS));}catch(e){}}
+  function saveTasksLocal(){try{localStorage.setItem(LSK,JSON.stringify(TASKS));}catch(e){}}
+  function saveTasks(){saveTasksLocal();saveState();}
   var TASKS=loadTasks();
 
   function renderTasks(){
@@ -468,7 +475,7 @@
   function addParte(){var dt=document.getElementById("f-date").value||iso(new Date());
     var st=document.getElementById("f-st").value;var nt=document.getElementById("f-note").value.trim()||"(sin detalle)";
     var ta=document.getElementById("bitacora");ta.value=(ta.value.trim()+"\n"+dt+" | "+st+" | "+nt).trim();
-    document.getElementById("f-note").value="";render();}
+    document.getElementById("f-note").value="";render();saveState();}
   function loadFile(ev){var f=ev.target.files[0];if(!f)return;var r=new FileReader();
     r.onload=function(e){var ls=e.target.result.split("\n"),keep=[];
       for(var i=0;i<ls.length;i++)if(/^\s*\d{4}-\d{2}-\d{2}\s*\|/.test(ls[i]))keep.push(ls[i].trim());
@@ -486,12 +493,56 @@
     document.getElementById("cm").textContent=pad(Math.floor(s%3600/60));
     document.getElementById("cs").textContent=pad(s%60);}
 
+  /* ---------- SYNC CON CLAUDE (File System Access API) ---------- */
+  var EFILE="ESTADO_TABLERO.json", dirHandle=null, syncOn=false;
+  function fsaSupported(){return typeof window.showDirectoryPicker==="function";}
+  function idb(cb){try{var r=indexedDB.open("jorge_ops_db",1);
+    r.onupgradeneeded=function(){r.result.createObjectStore("kv");};
+    r.onsuccess=function(){cb(r.result);};r.onerror=function(){cb(null);};}catch(e){cb(null);}}
+  function idbSet(k,v){idb(function(db){if(!db)return;try{db.transaction("kv","readwrite").objectStore("kv").put(v,k);}catch(e){}});}
+  function idbGet(k,cb){idb(function(db){if(!db){cb(null);return;}try{var g=db.transaction("kv","readonly").objectStore("kv").get(k);g.onsuccess=function(){cb(g.result||null);};g.onerror=function(){cb(null);};}catch(e){cb(null);}});}
+  function syncUI(){var s=document.getElementById("syncstat"),b=document.getElementById("syncbtn");if(!s)return;
+    if(!fsaSupported()){s.innerHTML='Tu navegador no permite vincular carpeta (usa Chrome por https). Mientras tanto, usa <b>Exportar TAREAS.md</b>.';if(b)b.style.display="none";return;}
+    if(syncOn){s.innerHTML='✓ <b>Vinculado.</b> Lo que marques se guarda en <code>'+EFILE+'</code> en tu carpeta. Claude y tus oficiales (6:03 y 22:00) lo leen.';if(b)b.textContent="Re-vincular carpeta";}
+    else{s.innerHTML='No vinculado: tus marcas viven solo en este navegador. Pulsa el botón para que Claude pueda leerlas.';if(b)b.textContent="🔗 Vincular con mi Mac";}}
+  async function ensurePerm(h){try{var o={mode:"readwrite"};if((await h.queryPermission(o))==="granted")return true;if((await h.requestPermission(o))==="granted")return true;}catch(e){}return false;}
+  async function linkFolder(){
+    if(!fsaSupported()){alert("Tu navegador no soporta vincular carpeta. Abre la página en Chrome por https y reintenta, o usa Exportar TAREAS.md.");return;}
+    try{dirHandle=await window.showDirectoryPicker({id:"campamento",mode:"readwrite"});
+      idbSet("dir",dirHandle);syncOn=true;await loadFromDisk();renderTasks();render();await saveState();syncUI();
+      alert("Vinculado. Elige la carpeta CAMPAMENTO. Desde ahora todo se guarda en "+EFILE+".");
+    }catch(e){}
+  }
+  async function restoreLink(){
+    if(!fsaSupported()){syncUI();return;}
+    idbGet("dir",async function(h){
+      if(h){try{if((await h.queryPermission({mode:"readwrite"}))==="granted"){dirHandle=h;syncOn=true;await loadFromDisk();renderTasks();render();}}catch(e){}}
+      syncUI();
+    });
+  }
+  async function saveState(){
+    if(!syncOn||!dirHandle)return;
+    try{if(!(await ensurePerm(dirHandle)))return;
+      var lines=document.getElementById("bitacora").value.split("\n").map(function(x){return x.trim();}).filter(Boolean);
+      var done=0;for(var i=0;i<TASKS.length;i++)if(TASKS[i].done)done++;
+      var data={actualizado:new Date().toLocaleString("es-PE"),resumen:{hechas:done,total:TASKS.length,pct:TASKS.length?Math.round(done/TASKS.length*100):0},tareas:TASKS,bitacora:lines};
+      var fh=await dirHandle.getFileHandle(EFILE,{create:true});var w=await fh.createWritable();await w.write(JSON.stringify(data,null,2));await w.close();
+    }catch(e){}
+  }
+  async function loadFromDisk(){
+    if(!dirHandle)return;
+    try{var fh=await dirHandle.getFileHandle(EFILE);var f=await fh.getFile();var d=JSON.parse(await f.text());
+      if(d&&d.tareas&&d.tareas.length){TASKS=d.tareas;saveTasksLocal();}
+      if(d&&d.bitacora&&d.bitacora.length){document.getElementById("bitacora").value=d.bitacora.join("\n");}
+    }catch(e){}
+  }
+
   /* ---------- INIT ---------- */
   document.getElementById("todaystr").textContent=iso(new Date());
   document.getElementById("f-date").value=iso(new Date());
   document.getElementById("nt-date").value=iso(new Date());
   document.getElementById("bitacora").value="2026-06-19 | _ | primer dia de operaciones";
-  renderTasks();render();tick();setInterval(tick,1000);
+  renderTasks();render();tick();setInterval(tick,1000);restoreLink();
 </script>
 </body>
 </html>
